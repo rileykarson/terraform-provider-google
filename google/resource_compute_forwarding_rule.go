@@ -225,7 +225,7 @@ func resourceComputeForwardingRuleRead(d *schema.ResourceData, meta interface{})
 	frule, err := config.clientCompute.ForwardingRules.Get(
 		project, region, d.Id()).Do()
 	if err != nil {
-		return handleNotFoundError(err, d, fmt.Sprintf("Forwarding Rule %q", d.Get("name").(string)))
+		return handleNotFoundError(err, d, fmt.Sprintf("Forwarding Rule %q", d.Id()))
 	}
 
 	d.Set("name", frule.Name)
