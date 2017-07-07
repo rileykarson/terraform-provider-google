@@ -178,18 +178,7 @@ func resourceComputeInstanceGroupManagerCreate(d *schema.ResourceData, meta inte
 	}
 
 	log.Printf("[DEBUG] InstanceGroupManager insert request: %#v", manager)
-	var op interface{}
-	switch computeApiVersion {
-	case v1:
-		managerV1, err := convertInstanceGroupManagerToV1(manager)
-		if err != nil {
-			return err
-		}
-
-		op, err = config.clientCompute.InstanceGroupManagers.Insert(
-			project, d.Get("zone").(string), managerV1).Do()
-	}
-
+	op, err := config.clientComputeMultiversion.InsertInstanceGroupManager(project, d.Get("zone").(string), manager, computeApiVersion)
 	if err != nil {
 		return fmt.Errorf("Error creating InstanceGroupManager: %s", err)
 	}
