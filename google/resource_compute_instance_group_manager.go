@@ -245,30 +245,18 @@ func resourceComputeInstanceGroupManagerRead(d *schema.ResourceData, meta interf
 		var v1Manager *compute.InstanceGroupManager
 		var e error
 		if zone, ok := d.GetOk("zone"); ok {
-			v1Manager, e = config.clientCompute.InstanceGroupManagers.Get(project, zone.(string), d.Id()).Do()
+			manager, e = config.clientComputeMultiversion.GetInstanceGroupManager(project, zone.(string), d.Id(), computeApiVersion)
 
 			if e != nil {
 				return handleNotFoundError(e, d, fmt.Sprintf("Instance Group Manager %q", d.Get("name").(string)))
 			}
 		} else {
-			// If the resource was imported, the only info we have is the ID. Try to find the resource
-			// by searching in the region of the project.
-			var resource interface{}
-			resource, e = getZonalResourceFromRegion(getInstanceGroupManager, region, config.clientCompute, project)
+			_, e = getZonalResourceFromRegion(getInstanceGroupManager, region, config.clientCompute, project)
 
 			if e != nil {
 				return e
 			}
 
-			v1Manager = resource.(*compute.InstanceGroupManager)
-		}
-
-		if v1Manager == nil {
-			log.Printf("[WARN] Removing Instance Group Manager %q because it's gone", d.Get("name").(string))
-
-			// The resource doesn't exist anymore
-			d.SetId("")
-			return nil
 		}
 
 		err = Convert(v1Manager, manager)
@@ -281,35 +269,20 @@ func resourceComputeInstanceGroupManagerRead(d *schema.ResourceData, meta interf
 			return config.clientComputeBeta.InstanceGroupManagers.Get(project, zone, d.Id()).Do()
 		}
 
-		var v0betaManager *computeBeta.InstanceGroupManager
 		var e error
 		if zone, ok := d.GetOk("zone"); ok {
-			v0betaManager, e = config.clientComputeBeta.InstanceGroupManagers.Get(project, zone.(string), d.Id()).Do()
+			manager, e = config.clientComputeMultiversion.GetInstanceGroupManager(project, zone.(string), d.Id(), computeApiVersion)
 
 			if e != nil {
 				return handleNotFoundError(e, d, fmt.Sprintf("Instance Group Manager %q", d.Get("name").(string)))
 			}
 		} else {
-			// If the resource was imported, the only info we have is the ID. Try to find the resource
-			// by searching in the region of the project.
-			var resource interface{}
-			resource, e = getZonalBetaResourceFromRegion(getInstanceGroupManager, region, config.clientComputeBeta, project)
+			_, e = getZonalBetaResourceFromRegion(getInstanceGroupManager, region, config.clientComputeBeta, project)
 			if e != nil {
 				return e
 			}
 
-			v0betaManager = resource.(*computeBeta.InstanceGroupManager)
 		}
-
-		if v0betaManager == nil {
-			log.Printf("[WARN] Removing Instance Group Manager %q because it's gone", d.Get("name").(string))
-
-			// The resource doesn't exist anymore
-			d.SetId("")
-			return nil
-		}
-
-		manager = v0betaManager
 	}
 
 	zoneUrl := strings.Split(manager.Zone, "/")
@@ -605,20 +578,20 @@ func resourceComputeInstanceGroupManagerDelete(d *schema.ResourceData, meta inte
 	var op interface{}
 	switch computeApiVersion {
 	case v1:
-		op, err = config.clientCompute.InstanceGroupManagers.Delete(project, zone, d.Id()).Do()
+		op, err = config.clientComputeMultiversion.DeleteInstanceGroupManager(project, zone, d.Id(), computeApiVersion)
 		attempt := 0
 		for err != nil && attempt < 20 {
 			attempt++
 			time.Sleep(2000 * time.Millisecond)
-			op, err = config.clientCompute.InstanceGroupManagers.Delete(project, zone, d.Id()).Do()
+			op, err = config.clientComputeMultiversion.DeleteInstanceGroupManager(project, zone, d.Id(), computeApiVersion)
 		}
 	case v0beta:
-		op, err = config.clientComputeBeta.InstanceGroupManagers.Delete(project, zone, d.Id()).Do()
+		op, err = config.clientComputeMultiversion.DeleteInstanceGroupManager(project, zone, d.Id(), computeApiVersion)
 		attempt := 0
 		for err != nil && attempt < 20 {
 			attempt++
 			time.Sleep(2000 * time.Millisecond)
-			op, err = config.clientComputeBeta.InstanceGroupManagers.Delete(project, zone, d.Id()).Do()
+			op, err = config.clientComputeMultiversion.DeleteInstanceGroupManager(project, zone, d.Id(), computeApiVersion)
 		}
 	}
 
