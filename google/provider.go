@@ -62,6 +62,7 @@ func Provider() terraform.ResourceProvider {
 
 		DataSourcesMap: map[string]*schema.Resource{
 			"google_active_folder":                   dataSourceGoogleActiveFolder(),
+			"google_bigtable_gcpolicy":               dataSourceGoogleBigtableGCPolicy(),
 			"google_billing_account":                 dataSourceGoogleBillingAccount(),
 			"google_dns_managed_zone":                dataSourceDnsManagedZone(),
 			"google_client_config":                   dataSourceGoogleClientConfig(),
