@@ -1,1 +1,1 @@
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/open/git_repo=https://github.com/rileykarson/terraform-provider-google/tree/cs-test.git)
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/rileykarson/terraform-provider-google.git&working_dir=tree/cs-test)
