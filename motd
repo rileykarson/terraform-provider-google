@@ -1,1 +1,5 @@
+===
+
 Welcome to Terraform in Cloud Shell! Follow the tutorial or run "terraform init" and "terraform apply" to get started. Make sure to run "terraform destroy" before quitting!
+
+===
