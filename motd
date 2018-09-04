@@ -1,14 +1,12 @@
 ===
 
-Welcome to Terraform in Cloud Shell!
-
 Bored of the tutorial? All you need to do to get started:
 1. Fill in your project in main.tf
 2. Run "terraform init"
 3. Run "terraform apply"!
 
-This uses real resources that will be billed to your
-GCP project - so make sure you run "terraform destroy"
-before quitting!
+These examples use real resources that will be billed to the
+Google Cloud Platform project you use - so make sure that you
+run "terraform destroy" before quitting!
 
 ===
