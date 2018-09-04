@@ -1,5 +1,10 @@
-provider "google" {
-	project = "${local.project}"
+locals {
+  #===
+  #  
+  # Fill in your GCP project here!
+  #
+  #===
+  project = “YOUR_PROJECT_HERE”
 }
 
 resource "google_compute_backend_bucket" "image_backend" {
@@ -13,17 +18,14 @@ resource "google_storage_bucket" "image_bucket" {
   location = "EU"
 }
 
+locals {
+  name_prefix = "${random_pet.prefix.id}"
+}
+
 resource "random_pet" "prefix" {
   length = 2
 }
 
-locals {
-  name_prefix = "${random_pet.prefix.id}"
-  
-  #===
-  #  
-  # Fill in your GCP project here!
-  #
-  #===
-  project = “YOUR_PROJECT_HERE”
+provider "google" {
+  project = "${local.project}"
 }
