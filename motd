@@ -1,6 +1,6 @@
 ===
 
-Bored of the tutorial? All you need to do to get started:
+Not your first time? All you need to do to get started:
 1. Fill in your project in main.tf
 2. Run "terraform init"
 3. Run "terraform apply"!
