@@ -4,7 +4,7 @@ locals {
   # Fill in your GCP project here!
   #
   #===
-  project = “YOUR_PROJECT_HERE”
+  project = "YOUR_PROJECT_HERE"
 }
 
 resource "google_compute_backend_bucket" "image_backend" {
