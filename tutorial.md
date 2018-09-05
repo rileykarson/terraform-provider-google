@@ -4,6 +4,10 @@
 
 Hello World
 
+<walkthrough-editor-spotlight spotlightId="navigator" filePath="main.tf"
+                              text="My file">
+</walkthrough-editor-spotlight>
+
 ### Part 1
 
 Part One Instructions.
