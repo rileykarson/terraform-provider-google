@@ -4,7 +4,7 @@
 
 Hello World
 
-<walkthrough-editor-spotlight spotlightId="navigator" filePath="main.tf"
+<walkthrough-editor-spotlight spotlightId="navigator" filePath="tutorial.md"
                               text="My file">
 </walkthrough-editor-spotlight>
 
