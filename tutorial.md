@@ -18,4 +18,6 @@ Part Two Instructions.
 
 ## Conclusion
 
+<walkthrough-project-setup></walkthrough-project-setup>
+
 Done!
