@@ -37,11 +37,12 @@ With the providers and a project, you're ready to use Terraform. Go ahead!
 terraform apply
 ```
 
+Terraform will show you what it plans to do, and prompt you to accept. Type "yes" to accept the plan.
+
 ```bash
 yes
 ```
 
-Terraform will show you what it plans to do, and prompt you to accept. Type "yes" to accept the plan.
 
 ## Post-Apply
 
