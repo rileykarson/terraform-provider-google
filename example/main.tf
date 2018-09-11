@@ -8,11 +8,3 @@ resource "google_storage_bucket" "image_bucket" {
   name     = "${local.name_prefix}-bucket"
   location = "EU"
 }
-
-locals {
-  name_prefix = "${random_pet.prefix.id}"
-}
-
-resource "random_pet" "prefix" {
-  length = 2
-}
