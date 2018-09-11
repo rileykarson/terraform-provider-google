@@ -79,3 +79,6 @@ Run the following to remove the resources Terraform provisioned:
 ```bash
 terraform destroy
 ```
+```bash
+yes
+```
