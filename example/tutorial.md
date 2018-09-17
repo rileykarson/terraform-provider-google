@@ -8,7 +8,7 @@ Welcome to Terraform in Cloud Shell! We need you to let us know what project you
 
 <walkthrough-project-billing-setup permissions="compute.backendBuckets.create"></walkthrough-project-billing-setup>
 
-Terraform uses real resources, so anything you create will be billed against this project.
+Terraform uses real resources, so anything you create in this session will be billed against this project.
 
 This tutorial requires the Compute API. Not sure if you have it enabled? Click the "Enable APIs" button below.
 Otherwise, go ahead and click "Forward"!
