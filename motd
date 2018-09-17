@@ -1,6 +1,6 @@
 ===
 
-Not your first time? All you need to do to get started:
+Quickstart:
 1. Type 'export GOOGLE_CLOUD_PROJECT="{{PROJECT-NAME}}"' with your project name
 2. Run 'terraform init'
 3. Run 'terraform apply'!
