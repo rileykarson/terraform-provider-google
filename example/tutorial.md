@@ -17,7 +17,7 @@ Otherwise, go ahead and click "Forward"!
 
 ## Terraforming!
 
-Let's get Terraform using {{project-id}}! Click the Cloud Shell icon below to copy the command
+Let's use {{project-id}} with Terraform! Click the Cloud Shell icon below to copy the command
 to your shell, and then run it from the shell by pressing Enter/Return. Terraform will pick up
 the project name from the environment variable.
 
