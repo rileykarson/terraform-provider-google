@@ -121,8 +121,9 @@ func resourceStorageObjectAclRead(d *schema.ResourceData, meta interface{}) erro
 
 	// Predefined ACLs cannot easily be parsed once they have been processed
 	// by the GCP server
+	role_entity := make([]interface{}, 0)
 	if _, ok := d.GetOk("predefined_acl"); !ok {
-		role_entity := make([]interface{}, 0)
+
 		re_local := d.Get("role_entity").([]interface{})
 		re_local_map := make(map[string]string)
 		for _, v := range re_local {
@@ -150,9 +151,8 @@ func resourceStorageObjectAclRead(d *schema.ResourceData, meta interface{}) erro
 				log.Printf("[DEBUG]: saving re %s-%s", role, entity)
 			}
 		}
-
-		d.Set("role_entity", role_entity)
 	}
+	d.Set("role_entity", role_entity)
 
 	d.SetId(getObjectAclId(object))
 	return nil
