@@ -293,11 +293,19 @@ func resourceBigtableInstanceDestroy(d *schema.ResourceData, meta interface{}) e
 }
 
 func flattenBigtableCluster(c *bigtable.ClusterInfo) map[string]interface{} {
+	var storageType string
+	switch c.StorageType {
+	case bigtable.SSD:
+		storageType = "SSD"
+	case bigtable.HDD:
+		storageType = "HDD"
+	}
+
 	return map[string]interface{}{
 		"zone":         c.Zone,
 		"num_nodes":    c.ServeNodes,
 		"cluster_id":   c.Name,
-		"storage_type": c.StorageType,
+		"storage_type": storageType,
 	}
 }
 
