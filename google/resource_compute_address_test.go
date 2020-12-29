@@ -66,11 +66,11 @@ resource "google_compute_address" "internal" {
 }
 
 resource "google_compute_network" "default" {
-  name = "network-test-%s"
+  name = "tf-test-addr-internal-%s"
 }
 
 resource "google_compute_subnetwork" "foo" {
-  name          = "subnetwork-test-%s"
+  name          = "tf-test-addr-internal--%s"
   ip_cidr_range = "10.0.0.0/16"
   region        = "us-east1"
   network       = google_compute_network.default.self_link

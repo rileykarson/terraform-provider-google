@@ -1082,7 +1082,7 @@ func flattenMonitoringSloServiceLevelIndicator(v interface{}, d *schema.Resource
 	}
 	transformed := make(map[string]interface{})
 	transformed["basic_sli"] =
-		flattenMonitoringSloServiceLevelIndicatorBasicSli(original["basicSli"], d, config)
+	flattenMonitoringSloServiceLevelIndicatorBasicSli(original["basicSli"], d, config)
 	transformed["request_based_sli"] =
 		flattenMonitoringSloServiceLevelIndicatorRequestBasedSli(original["requestBased"], d, config)
 	transformed["windows_based_sli"] =
