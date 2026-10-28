@@ -15,4 +15,3 @@ jobs:
         with:
           configuration-path: ".github/reviewer-lottery.yml"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
