@@ -21,17 +21,47 @@ jobs:
       uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6.3.0
       with:
         go-version-file: "go.mod"
+        cache: false
+
+    - name: Restore Go cache
+      uses: actions/cache/restore@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      if: github.event_name != 'push'
+      with:
+        path: |
+          ~/go/pkg/mod
+          ~/.cache/go-build
+        key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}-
+          ${{ runner.os }}-go-
+
+    - name: Cache Go on main
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      if: github.event_name == 'push'
+      with:
+        path: |
+          ~/go/pkg/mod
+          ~/.cache/go-build
+        key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}-
+          ${{ runner.os }}-go-
 
     - name: Get dependencies
       run: |
         go mod download
 
-    # `make lint` runs `go vet`, which compiles all provider packages internally
-    # without spending time linking and installing an unused binary via `go install`.
-    - name: Build and Lint
-      run: make lint
+    # `make testnolint` compiles all provider and unit test packages into the
+    # Go build cache without linking an unused root binary via `go build`, so
+    # `make lint` (`fmtcheck` + `go vet ./...`) can reuse the cached artifacts.
+    - name: Run Unit Tests
+      run: |
+        make testnolint
 
-    - name: Test
+    - name: Full Build & Lint Check
+      run: |
+        make lint
+
+    - name: Documentation Check
       run: |
         make docscheck
-        make testnolint
